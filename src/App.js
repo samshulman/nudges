@@ -25,6 +25,6 @@ const App = () => {
     </div>
   );
 };
->>>>>>> gh-pages
+
 
 export default App;

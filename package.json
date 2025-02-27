@@ -1,19 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "shopping-site",
-  "version": "0.1.0",
-  "homepage": "https://samshulman.github.io/nudges.github.io",
-  "private": true,
-  "dependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-=======
   "name": "nudges",
   "version": "1.0.0",
   "private": true,
@@ -23,12 +8,10 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "react-scripts": "latest"
->>>>>>> gh-pages
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-<<<<<<< HEAD
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -39,15 +22,6 @@
       "react-app",
       "react-app/jest"
     ]
-=======
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "gh-pages": "^5.0.0"
->>>>>>> gh-pages
   },
   "browserslist": {
     "production": [
@@ -60,11 +34,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< HEAD
   },
   "devDependencies": {
     "gh-pages": "^6.3.0"
-=======
->>>>>>> gh-pages
   }
 }
