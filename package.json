@@ -2,7 +2,7 @@
   "name": "nudges",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://samshulman.github.io/nudges",
+  "homepage": "https://samshulman.github.io/nudges/",
   "dependencies": {
     "lucide-react": "^0.477.0",
     "react": "^18.0.0",
