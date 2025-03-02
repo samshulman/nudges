@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Star } from "lucide-react";
 
 const ProductCard = ({ product, addToCart }) => {
   return (
@@ -6,10 +6,17 @@ const ProductCard = ({ product, addToCart }) => {
       <img src={product.image} alt={product.name} />
       <h3>{product.name}</h3>
       <p>${product.price}</p>
-      
+
+      {/* Rating section */}
+      <div className="rating">
+        <Star className="star-icon" size={16} fill="gold" stroke="none" />
+        <span>{product.rating}</span>
+      </div>
+
       {/* Button container to stack buttons vertically */}
       <div className="button-container">
         <button onClick={() => addToCart(product)}>Add to Cart</button>
+        
 
         {/* Conditionally render "Buy Now" button */}
         {product.showBuyNow && (

@@ -1,11 +1,25 @@
 import { useState } from "react";
 
-const Checkout = ({ cart, clearCart }) => {
+const Checkout = ({ cart, setCart, clearCart }) => {
   const [customerInfo, setCustomerInfo] = useState({ name: "", email: "" });
   const [orderPlaced, setOrderPlaced] = useState(false);
 
   const handleChange = (e) => {
     setCustomerInfo({ ...customerInfo, [e.target.name]: e.target.value });
+  };
+
+  // Function to update quantity of an item
+  const updateQuantity = (id, newQuantity) => {
+    if (newQuantity < 1) return; // Prevents zero or negative values
+
+    setCart(cart.map(item => 
+      item.id === id ? { ...item, quantity: newQuantity } : item
+    ));
+  };
+
+  // Function to remove an item from the cart
+  const removeItem = (id) => {
+    setCart(cart.filter(item => item.id !== id));
   };
 
   const handleCheckout = () => {
@@ -18,7 +32,7 @@ const Checkout = ({ cart, clearCart }) => {
   };
 
   return (
-    <div>
+    <div className="web-container">
       <h2>Checkout</h2>
       {orderPlaced ? (
         <p>Thank you, {customerInfo.name}! Your order has been placed.</p>
@@ -30,13 +44,26 @@ const Checkout = ({ cart, clearCart }) => {
             <div>
               <h3>Order Summary</h3>
               <ul>
-                {cart.map((item, index) => (
-                  <li key={index}>
-                    {item.name} - ${item.price}
+                {cart.map((item) => (
+                  <li key={item.id} className="cart-item">
+                    <span>{item.name} - ${item.price}</span>
+                    
+                    {/* Quantity Controls */}
+                    <div className="quantity-controls">
+                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+                      <span>{item.quantity}</span>
+                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                    </div>
+
+                    {/* Remove Item Button */}
+                    <button className="remove-btn" onClick={() => removeItem(item.id)}>Remove</button>
                   </li>
                 ))}
               </ul>
-              <h3>Total: ${cart.reduce((sum, item) => sum + item.price, 0)}</h3>
+              <h3>Total: ${cart.reduce((sum, item) => sum + item.price * item.quantity, 0)}</h3>
+
+              
+              {/* Checkout Form */}
               <div>
                 <input
                   type="text"
