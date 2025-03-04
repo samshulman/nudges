@@ -63,12 +63,13 @@ body {
 
 /* Ensures product grid layout */
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  justify-content: center;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr); /* 4 columns */
+	grid-template-rows: repeat(3, auto);  /* 3 rows */
+	gap: 20px;
+	justify-content: center;
+
 }
-  
   /* Style for button container */
   .button-container {
 	display: flex;
