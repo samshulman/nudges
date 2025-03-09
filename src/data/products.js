@@ -1,24 +1,22 @@
-// const products = [
-// 	{ id: 1, name: "Alpha Pencil", price: 12.29, showBuyNow: false, rating: 2.2, image:"/nudges/images/pencil1.png" },
-// 	{ id: 2, name: "Beta Pencil", price: 13.99, showBuyNow: false, rating: 3.2, image:"/nudges/images/pencil2.png"  },
-// 	{ id: 3, name: "Gamma Pencil", price: 14.49, showBuyNow: false, rating: 2.8, image:"/nudges/images/pencil3.png"  },
-// 	{ id: 4, name: "Delta Pencil", price: 10.99, showBuyNow: false, rating: 1.9, image:"/nudges/images/pencil1.png"  },
-// 	{ id: 5, name: "Epsilon Pencil", price: 16.29, showBuyNow: false, rating: 3.5, image:"/nudges/images/pencil2.png"  },
-// 	{ id: 6, name: "Zeta Pencil", price: 15.29, showBuyNow: false, rating: 3.2, image:"/nudges/images/pencil3.png"  },
-// 	{ id: 7, name: "Eta Pencil", price: 12.99, showBuyNow: false, rating: 2.9, image:"/nudges/images/pencil1.png"  },
-// 	{ id: 8, name: "Theta Pencil", price: 13.49, showBuyNow: false, rating: 2.7, image:"/nudges/images/pencil2.png"  },
-// 	{ id: 9, name: "Iota Pencil", price: 10.99, showBuyNow: false, rating: 2.6, image:"/nudges/images/pencil3.png"  },
-// 	{ id: 10, name: "Kappa Pencil", price: 11.29, showBuyNow: false, rating: 2.4, image:"/nudges/images/pencil1.png"  },
-// 	{ id: 11, name: "Lambda Pencil", price: 12.99, showBuyNow: true, rating: 4.7, image:"/nudges/images/pencil2.png"  },
-// 	{ id: 12, name: "Mu Pencil", price: 10.99, showBuyNow: false, rating: 4.9, image:"/nudges/images/pencil3.png"  }
-//   ];
-
 function getRandomItem(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function shuffleArray(arr) {
     return arr.sort(() => Math.random() - 0.5);
+}
+
+// Box-Muller transform to generate Gaussian random numbers with bounds
+function gaussianRandom(mean, standardDeviation, min = -Infinity, max = Infinity) {
+    let result;
+    do {
+        let u = 0, v = 0;
+        while(u === 0) u = Math.random();
+        while(v === 0) v = Math.random();
+        const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+        result = mean + z * standardDeviation;
+    } while (result < min || result > max);
+    return result;
 }
 
 function generateRandomProducts() {
@@ -29,26 +27,25 @@ function generateRandomProducts() {
         "Iota Pencil", "Kappa Pencil", "Lambda Pencil", "Mu Pencil"
     ]);
 
-    // Define price ranges
+    // Define price distributions (mean, standard deviation)
     const priceCategories = {
-        high: [13.99, 14.49, 15.29, 16.29, 16.99],
-        medium: [10.99, 11.29, 12.29, 12.99, 13.49],
-        low: [7.99, 8.49, 8.99, 9.49, 9.99]
+        high: { mean: 15, stdDev: 1 },
+        medium: { mean: 12, stdDev: 1 },
+        low: { mean: 9, stdDev: 1 }
     };
 
-    // Define rating categories
+    // Define rating distributions (mean, standard deviation)
     const ratingCategories = {
-        high: [4.0, 4.2, 4.5, 4.7, 4.9],
-        medium: [3.0, 3.2, 3.5, 3.7, 3.9],
-        low: [2.0, 2.2, 2.5, 2.7, 2.9]
+        high: { mean: 4.5, stdDev: 0.2 },
+        medium: { mean: 3.5, stdDev: 0.2 },
+        low: { mean: 2.5, stdDev: 0.2 }
     };
 
     // Define image quality options
     const imageOptions = {
         high: ["/nudges/images/pencil-high.png"],
-		medium: ["/nudges/images/pencil-med.png"],
+        medium: ["/nudges/images/pencil-med.png"],
         low: ["/nudges/images/pencil-low.png"],
-        none: [null]
     };
 
     let products = [];
@@ -59,17 +56,35 @@ function generateRandomProducts() {
         const ratingLevel = getRandomItem(Object.keys(ratingCategories));
         const imageLevel = getRandomItem(Object.keys(imageOptions));
 
+        // Generate price and rating using Gaussian distribution
+        let price = gaussianRandom(
+            priceCategories[priceLevel].mean,
+            priceCategories[priceLevel].stdDev,
+            5,  // min price
+            20  // max price
+        );
+        let rating = gaussianRandom(
+            ratingCategories[ratingLevel].mean,
+            ratingCategories[ratingLevel].stdDev,
+            0,  // min rating
+            5   // max rating
+        );
+
+        // Round to appropriate decimal places
+        price = Number(price.toFixed(2));
+        rating = Number(rating.toFixed(1));
+
         products.push({
             id: i + 1,
-            name: names[i], // Names are shuffled earlier
-            price: getRandomItem(priceCategories[priceLevel]),
-            showBuyNow: Math.random() < 0.5, // 50% chance of "Buy Now" button
-            rating: getRandomItem(ratingCategories[ratingLevel]),
+            name: names[i],
+            price: price,
+            showBuyNow: Math.random() < 0.5,
+            rating: rating,
             image: getRandomItem(imageOptions[imageLevel])
         });
     }
 
-    return shuffleArray(products); // Randomize final order
+    return shuffleArray(products);
 }
 
 // Run the function to generate randomized products
