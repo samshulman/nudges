@@ -1,19 +1,19 @@
-import ProductCardSocial from "../components/ProductCardSocial";
+import ProductCardScarcity from "../components/ProductCardScarcity";
 import products from "../data/products-mini";
 
 
-const ProductsMini = ({ addToCart, handleCheckout }) => {
+const ProductsScarcity = ({ addToCart, handleCheckout }) => {
 
   return (
     <div className="web-container">
       <h2>Shop Products</h2>
       <div className="product-grid">
         {products.map((product) => (
-          <ProductCardSocial key={product.id} product={product} addToCart={addToCart} handleCheckout={handleCheckout} />
+          <ProductCardScarcity key={product.id} product={product} addToCart={addToCart} handleCheckout={handleCheckout} />
         ))}
       </div>
     </div>
   );
 };
 
-export default ProductsMini;
+export default ProductsScarcity;

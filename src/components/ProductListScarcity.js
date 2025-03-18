@@ -1,7 +1,7 @@
-import ProductCardSocial from "./ProductCardSocial";
+import ProductCardScarcity from "./ProductCardScarcity";
 import products from "../data/products";
 
-const ProductsSocial = ({ addToCart, handleCheckout }) => {
+const ProductsScarcity = ({ addToCart, handleCheckout }) => {
   return (
     <div>
       <h2>Shop Products</h2>
@@ -15,4 +15,4 @@ const ProductsSocial = ({ addToCart, handleCheckout }) => {
   );
 };
 
-export default ProductsSocial;
+export default ProductsScarcity;

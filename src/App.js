@@ -11,25 +11,33 @@ import productsMini from "./data/products-mini";
 
 const App = () => {
   const [cart, setCart] = useState([]);
+  const [boughtProduct, setBoughtProduct] = useState();
+  const [orderPlaced, setOrderPlaced] = useState(false);
+
   
 
-  const saveData = () => {
-    console.log("Saving data");
+  const saveData = (fromCheckout = true) => {
+    console.log("Saving data from:", fromCheckout ? "checkout" : "products page");
     fetch("https://sshulman.pythonanywhere.com/save-json", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        cart: cart,
+        cart: fromCheckout ? cart : [boughtProduct],
         products: productsMini,
-        dir_path: "data"
+        dir_path: "data",
+        from_checkout: fromCheckout
       })
     })
     .then(response => response.json())
     .then(data => console.log("Success:", data))
     .catch(error => console.error("Error:", error));
   };
+
+  const setBought = (product) => {
+    setBoughtProduct(product)
+  }
 
   const addToCart = (product) => {
     
@@ -49,8 +57,9 @@ const App = () => {
     });
   };
 
-  const handleCheckoutFromProduct = () => {
-    saveData();
+  const handleCheckoutFromProduct = (fromCheckout = false) => {
+    saveData(fromCheckout);
+    setOrderPlaced(true);
     window.location.hash = "/checkout";
     setCart([]); // Clear the cart
   };
@@ -64,8 +73,8 @@ const App = () => {
         <Route path="/products" element={<Products addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/products-strat" element={<ProductsStrat addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/products-1" element={<ProductsScarcity addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
-        <Route path="/products-2" element={<ProductsBuy addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
-        <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} clearCart={() => setCart([])} saveData={saveData} />} />
+        <Route path="/products-2" element={<ProductsBuy setBought={setBought} addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} clearCart={() => setCart([])} saveData={saveData} orderPlaced={orderPlaced} setOrderPlaced={setOrderPlaced} />} />
       </Routes>
     </div>
   );

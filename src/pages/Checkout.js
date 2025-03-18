@@ -3,9 +3,8 @@ import products from "../data/products";
 import productsStrat from "../data/products-strat";
 import productsMini from "../data/products-mini";
 
-const Checkout = ({ cart, setCart, clearCart, saveData }) => {
+const Checkout = ({ cart, setCart, clearCart, saveData, orderPlaced, setOrderPlaced }) => {
   const [customerInfo, setCustomerInfo] = useState({ name: "", email: "" });
-  const [orderPlaced, setOrderPlaced] = useState(false);
 
   const handleChange = (e) => {
     setCustomerInfo({ ...customerInfo, [e.target.name]: e.target.value });
