@@ -3,7 +3,8 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductsStrat from "./pages/Products-Strat";
-import ProductsMini from "./pages/Products-Mini";
+import ProductsScarcity from "./pages/Products-Scarcity";
+import ProductsBuy from "./pages/Products-Buy";
 import Checkout from "./pages/Checkout";
 import { useState } from "react";
 import productsMini from "./data/products-mini";
@@ -62,7 +63,8 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/products" element={<Products addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/products-strat" element={<ProductsStrat addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
-        <Route path="/products-mini" element={<ProductsMini addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        <Route path="/products-1" element={<ProductsScarcity addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        <Route path="/products-2" element={<ProductsBuy addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} clearCart={() => setCart([])} saveData={saveData} />} />
       </Routes>
     </div>

@@ -1,12 +1,13 @@
 import ProductCard from "../components/ProductCard";
-import products from "../data/products";
+import products from "../data/products-mini";
 
-const Products = ({ addToCart, handleCheckout }) => {
+
+const ProductsMini = ({ addToCart, handleCheckout }) => {
+
   return (
-    <div>
+    <div className="web-container">
       <h2>Shop Products</h2>
       <div className="product-grid">
-        
         {products.map((product) => (
           <ProductCard key={product.id} product={product} addToCart={addToCart} handleCheckout={handleCheckout} />
         ))}
@@ -15,4 +16,4 @@ const Products = ({ addToCart, handleCheckout }) => {
   );
 };
 
-export default Products;
+export default ProductsMini;
