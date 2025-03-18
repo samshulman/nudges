@@ -1,9 +1,8 @@
 import { Star } from "lucide-react";
 
-const ProductCard = ({ product, addToCart, setBought, handleCheckout }) => {
+const ProductCard = ({ product, addToCart, handleCheckout }) => {
   const handleBuyNow = () => {
-    setBought(product)
-    handleCheckout(false, product);
+    handleCheckout(product);
   };
 
   return (

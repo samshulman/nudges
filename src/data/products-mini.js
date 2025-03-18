@@ -25,15 +25,15 @@ function generateRandomProducts() {
         "Alpha Pencil", "Beta Pencil", "Delta Pencil",  "Epsilon Pencil",
     ]);
 
-    // Determine how many products will have Buy Now button (1-4)
-    const numBuyNow = Math.floor(Math.random() * 4) + 1;
+    // Set to 1 to ensure only one product has button
+    const numButtons = 1;
     
-    // Create array of boolean values for Buy Now buttons
+    // Create array of boolean values for buttons
     const buyNowButtons = new Array(4).fill(false);
-    for (let i = 0; i < numBuyNow; i++) {
+    for (let i = 0; i < numButtons; i++) {
         buyNowButtons[i] = true;
     }
-    // Shuffle the Buy Now buttons
+    // Shuffle the buttons
     shuffleArray(buyNowButtons);
 
     let products = [];

@@ -6,25 +6,24 @@ import ProductsStrat from "./pages/Products-Strat";
 import ProductsScarcity from "./pages/Products-Scarcity";
 import ProductsBuy from "./pages/Products-Buy";
 import Checkout from "./pages/Checkout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import productsMini from "./data/products-mini";
 
 const App = () => {
   const [cart, setCart] = useState([]);
-  const [boughtProduct, setBoughtProduct] = useState();
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  
-
-  const saveData = (fromCheckout = true) => {
+  const saveData = (fromCheckout = true, product = null) => {
     console.log("Saving data from:", fromCheckout ? "checkout" : "products page");
+    const cartSave = fromCheckout ? cart : [product];
+    console.log("Saving cart:", cartSave);
     fetch("https://sshulman.pythonanywhere.com/save-json", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        cart: fromCheckout ? cart : [boughtProduct],
+        cart: cartSave,
         products: productsMini,
         dir_path: "data",
         from_checkout: fromCheckout
@@ -35,16 +34,15 @@ const App = () => {
     .catch(error => console.error("Error:", error));
   };
 
-  const setBought = (product) => {
-    setBoughtProduct(product)
-  }
+  // Save products data when component mounts
+  useEffect(() => {
+    saveData(true, null);
+  }, []);
 
   const addToCart = (product) => {
-    
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
       
-  
       if (existingItem) {
         // If product exists, update quantity
         return prevCart.map((item) =>
@@ -57,8 +55,8 @@ const App = () => {
     });
   };
 
-  const handleCheckoutFromProduct = (fromCheckout = false) => {
-    saveData(fromCheckout);
+  const handleCheckoutFromProduct = (product) => {
+    saveData(false, product);
     setOrderPlaced(true);
     window.location.hash = "/checkout";
     setCart([]); // Clear the cart
@@ -73,12 +71,11 @@ const App = () => {
         <Route path="/products" element={<Products addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/products-strat" element={<ProductsStrat addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/products-1" element={<ProductsScarcity addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
-        <Route path="/products-2" element={<ProductsBuy setBought={setBought} addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        <Route path="/products-2" element={<ProductsBuy addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} clearCart={() => setCart([])} saveData={saveData} orderPlaced={orderPlaced} setOrderPlaced={setOrderPlaced} />} />
       </Routes>
     </div>
   );
 };
-
 
 export default App;
