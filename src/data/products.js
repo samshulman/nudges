@@ -89,7 +89,7 @@ function generateRandomProducts() {
 
 // Run the function to generate randomized products
 const products = generateRandomProducts();
-console.log(products);
+// console.log(products);
   
 export default products;
   

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import products from "../data/products";
 
 const Checkout = ({ cart, setCart, clearCart }) => {
   const [customerInfo, setCustomerInfo] = useState({ name: "", email: "" });
@@ -22,20 +23,36 @@ const Checkout = ({ cart, setCart, clearCart }) => {
     setCart(cart.filter(item => item.id !== id));
   };
 
-  const handleCheckout = () => {
-    if (customerInfo.name && customerInfo.email && cart.length > 0) {
-      setOrderPlaced(true);
-      clearCart(); // Empty the cart after checkout
-    } else {
-      alert("Please fill out your details and add items to your cart.");
-    }
+  function saveData() {
+    console.log("Saving data");
+    fetch("https://sshulman.pythonanywhere.com/save-json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cart: cart,
+        products: products,
+        dir_path: "data"
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log("Success:", data))
+    .catch(error => console.error("Error:", error));
+  }
+
+  function handleCheckout() {
+    saveData();
+    setOrderPlaced(true);
+    clearCart(); // Empty the cart after checkout
+    
   };
 
   return (
     <div className="web-container">
       <h2>Checkout</h2>
       {orderPlaced ? (
-        <p>Thank you, {customerInfo.name}! Your order has been placed.</p>
+        <p>Thank you! Your order has been placed.</p>
       ) : (
         <>
           {cart.length === 0 ? (
@@ -65,20 +82,7 @@ const Checkout = ({ cart, setCart, clearCart }) => {
               
               {/* Checkout Form */}
               <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={customerInfo.name}
-                  onChange={handleChange}
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={customerInfo.email}
-                  onChange={handleChange}
-                />
+                
                 <button onClick={handleCheckout}>Place Order</button>
               </div>
             </div>

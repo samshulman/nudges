@@ -1,19 +1,19 @@
 import ProductCard from "../components/ProductCard";
-import products from "../data/products";
+import products from "../data/products-strat";
 
 
-const Products = ({ addToCart, handleCheckout }) => {
+const ProductsStrat = ({ addToCart }) => {
 
   return (
     <div className="web-container">
       <h2>Shop Products</h2>
       <div className="product-grid">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} addToCart={addToCart} handleCheckout={handleCheckout} />
+          <ProductCard key={product.id} product={product} addToCart={addToCart} />
         ))}
       </div>
     </div>
   );
 };
 
-export default Products;
+export default ProductsStrat;

@@ -1,6 +1,11 @@
 import { Star } from "lucide-react";
 
-const ProductCard = ({ product, addToCart }) => {
+const ProductCard = ({ product, addToCart, handleCheckout }) => {
+  const handleBuyNow = () => {
+    addToCart(product, true);
+    handleCheckout();
+  };
+
   return (
     <div className="product-card">
       
@@ -16,14 +21,14 @@ const ProductCard = ({ product, addToCart }) => {
 
       {/* Button container to stack buttons vertically */}
       <div className="button-container">
-        <button onClick={() => addToCart(product)}>Add to Cart</button>
+        <button onClick={() => addToCart(product, false)}>Add to Cart</button>
         
 
         {/* Conditionally render "Buy Now" button */}
         {product.showBuyNow && (
           <button
             className="buy-now"
-            onClick={() => window.alert(`Purchased: ${product.name}`)}
+            onClick={() => handleBuyNow()}
           >
             Buy Now
           </button>
