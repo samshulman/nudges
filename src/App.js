@@ -6,10 +6,29 @@ import ProductsStrat from "./pages/Products-Strat";
 import ProductsMini from "./pages/Products-Mini";
 import Checkout from "./pages/Checkout";
 import { useState } from "react";
+import productsMini from "./data/products-mini";
 
 const App = () => {
   const [cart, setCart] = useState([]);
   
+
+  const saveData = () => {
+    console.log("Saving data");
+    fetch("https://sshulman.pythonanywhere.com/save-json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cart: cart,
+        products: productsMini,
+        dir_path: "data"
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log("Success:", data))
+    .catch(error => console.error("Error:", error));
+  };
 
   const addToCart = (product, isBuyNow) => {
     if (!isBuyNow) {
@@ -33,9 +52,9 @@ const App = () => {
   };
 
   const handleCheckoutFromProduct = () => {
-    // Set orderPlaced to true and navigate to checkout page
-    window.location.hash = '#/checkout';
-
+    saveData();
+    setCart([]); // Clear the cart
+    window.location.hash = "/checkout";
   };
 
   return (
@@ -45,9 +64,9 @@ const App = () => {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<Home />} />
         <Route path="/products" element={<Products addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
-        <Route path="/products-strat" element={<ProductsStrat addToCart={addToCart} />} />
-        <Route path="/products-mini" element={<ProductsMini addToCart={addToCart} />} />
-        <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} clearCart={() => setCart([])} />} />
+        <Route path="/products-strat" element={<ProductsStrat addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        <Route path="/products-mini" element={<ProductsMini addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} clearCart={() => setCart([])} saveData={saveData} />} />
       </Routes>
     </div>
   );

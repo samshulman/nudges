@@ -1,7 +1,9 @@
 import { useState } from "react";
 import products from "../data/products";
+import productsStrat from "../data/products-strat";
+import productsMini from "../data/products-mini";
 
-const Checkout = ({ cart, setCart, clearCart }) => {
+const Checkout = ({ cart, setCart, clearCart, saveData }) => {
   const [customerInfo, setCustomerInfo] = useState({ name: "", email: "" });
   const [orderPlaced, setOrderPlaced] = useState(false);
 
@@ -23,29 +25,10 @@ const Checkout = ({ cart, setCart, clearCart }) => {
     setCart(cart.filter(item => item.id !== id));
   };
 
-  function saveData() {
-    console.log("Saving data");
-    fetch("https://sshulman.pythonanywhere.com/save-json", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        cart: cart,
-        products: products,
-        dir_path: "data"
-      })
-    })
-    .then(response => response.json())
-    .then(data => console.log("Success:", data))
-    .catch(error => console.error("Error:", error));
-  }
-
   function handleCheckout() {
     saveData();
     setOrderPlaced(true);
     clearCart(); // Empty the cart after checkout
-    
   };
 
   return (
