@@ -30,10 +30,7 @@ const App = () => {
     .catch(error => console.error("Error:", error));
   };
 
-  const addToCart = (product, isBuyNow) => {
-    if (!isBuyNow) {
-      alert("Item added to cart!")
-    }
+  const addToCart = (product) => {
     
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
@@ -53,8 +50,8 @@ const App = () => {
 
   const handleCheckoutFromProduct = () => {
     saveData();
-    setCart([]); // Clear the cart
     window.location.hash = "/checkout";
+    setCart([]); // Clear the cart
   };
 
   return (

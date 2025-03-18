@@ -78,7 +78,7 @@ function generateRandomProducts() {
             id: i + 1,
             name: names[i],
             price: price,
-            showBuyNow: Math.random() < 0.5,
+            showButton: Math.random() < 0.5,
             rating: rating,
             image: getRandomItem(imageOptions[imageLevel])
         });

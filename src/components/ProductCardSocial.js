@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 
-const ProductCard = ({ product, addToCart, handleCheckout }) => {
+const ProductCardSocial = ({ product, addToCart, handleCheckout }) => {
   const handleBuyNow = () => {
     alert("You bought " + product.name);
     handleCheckout();
@@ -28,9 +28,8 @@ const ProductCard = ({ product, addToCart, handleCheckout }) => {
         {product.showButton && (
           <button
             className="buy-now"
-            onClick={() => handleBuyNow()}
           >
-            Buy Now
+            Item selling out quickly!
           </button>
         )}
       </div>
@@ -38,4 +37,4 @@ const ProductCard = ({ product, addToCart, handleCheckout }) => {
   );
 };
 
-export default ProductCard;
+export default ProductCardSocial;

@@ -1,4 +1,5 @@
 import ProductCard from "../components/ProductCard";
+import ProductCardSocial from "../components/ProductCardSocial";
 import products from "../data/products";
 
 const Products = ({ addToCart, handleCheckout }) => {
@@ -8,7 +9,7 @@ const Products = ({ addToCart, handleCheckout }) => {
       <div className="product-grid">
         
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} addToCart={addToCart} handleCheckout={handleCheckout} />
+          <ProductCardSocial key={product.id} product={product} addToCart={addToCart} handleCheckout={handleCheckout} />
         ))}
       </div>
     </div>
