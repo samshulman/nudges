@@ -6,14 +6,14 @@ import ProductsStrat from "./pages/Products-Strat";
 import ProductsScarcity from "./pages/Products-Scarcity";
 import ProductsBuy from "./pages/Products-Buy";
 import Checkout from "./pages/Checkout";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import productsMini from "./data/products-mini";
 
 const App = () => {
   const [cart, setCart] = useState([]);
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  const saveData = (fromCheckout = true, product = null) => {
+  const saveData = (fromCheckout, product = null) => {
     console.log("Saving data from:", fromCheckout ? "checkout" : "products page");
     const cartSave = fromCheckout ? cart : [product];
     console.log("Saving cart:", cartSave);
@@ -23,7 +23,7 @@ const App = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        cart: cartSave,
+        item_bought: cartSave,
         products: productsMini,
         dir_path: "data",
         from_checkout: fromCheckout
@@ -34,14 +34,10 @@ const App = () => {
     .catch(error => console.error("Error:", error));
   };
 
-  // Save products data when component mounts
-  useEffect(() => {
-    saveData(true, null);
-  }, []);
-
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
+      setOrderPlaced(false)
       
       if (existingItem) {
         // If product exists, update quantity
@@ -56,10 +52,12 @@ const App = () => {
   };
 
   const handleCheckoutFromProduct = (product) => {
-    saveData(false, product);
-    setOrderPlaced(true);
-    window.location.hash = "/checkout";
-    setCart([]); // Clear the cart
+    if (product) {
+      saveData(false, product);  // Save the single product data first
+      setOrderPlaced(true);
+      window.location.hash = "/checkout";
+      setCart([]); // Clear the cart
+    }
   };
 
   return (
@@ -70,7 +68,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/products" element={<Products addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/products-strat" element={<ProductsStrat addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
-        <Route path="/products-1" element={<ProductsScarcity addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        {/* <Route path="/products-1" element={<ProductsScarcity addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} /> */}
         <Route path="/products-2" element={<ProductsBuy addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} clearCart={() => setCart([])} saveData={saveData} orderPlaced={orderPlaced} setOrderPlaced={setOrderPlaced} />} />
       </Routes>

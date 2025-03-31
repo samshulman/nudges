@@ -25,9 +25,11 @@ const Checkout = ({ cart, setCart, clearCart, saveData, orderPlaced, setOrderPla
   };
 
   function handleCheckout() {
-    saveData();
-    setOrderPlaced(true);
-    clearCart(); // Empty the cart after checkout
+    if (cart.length > 0) {
+      saveData(true, null);  // Save the cart data before clearing
+      setOrderPlaced(true);
+      clearCart(); // Empty the cart after checkout
+    }
   };
 
   return (

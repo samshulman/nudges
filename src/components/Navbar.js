@@ -7,9 +7,9 @@ const Navbar = () => {
       <ul>
         <li><Link to="/">Home</Link></li>
         {/* <li><Link to="/products">Shop</Link></li> */}
-        {/* <li><Link to="/products-strat">Shop 2.0</Link></li> */}
-        <li><Link to="/products-1">Shop</Link></li> 
-        <li><Link to="/products-2">Shop 2.0</Link></li>
+        {/* <li><Link to="/products-strat">Shop</Link></li> */}
+        {/* <li><Link to="/products-1">Shop</Link></li>  */}
+        <li><Link to="/products-2">Shop</Link></li>
         <li><Link to="/checkout">Checkout</Link></li>
 
       </ul>
