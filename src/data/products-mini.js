@@ -42,8 +42,8 @@ function generateRandomProducts() {
         // Generate random price between 10 and 20
         const price = Number((Math.random() * 10 + 10).toFixed(2));
         
-        // Generate random rating between 2 and 5
-        const rating = Number((Math.random() * 3 + 2).toFixed(1));
+        // Generate random rating between 3 and 5
+        const rating = Number((Math.random() * 2 + 3).toFixed(1));
 
         products.push({
             id: i + 1,
