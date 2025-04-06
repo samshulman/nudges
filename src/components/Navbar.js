@@ -8,8 +8,8 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         {/* <li><Link to="/products">Shop</Link></li> */}
         {/* <li><Link to="/products-strat">Shop</Link></li> */}
-        {/* <li><Link to="/products-1">Shop</Link></li>  */}
-        <li><Link to="/products-2">Shop</Link></li>
+        <li><Link to="/products-scarcity">Shop</Link></li> 
+        <li><Link to="/products-buynow">Shop</Link></li>
         <li><Link to="/checkout">Checkout</Link></li>
 
       </ul>

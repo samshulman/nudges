@@ -59,6 +59,7 @@ body {
   height: auto;         /* Keeps aspect ratio */
   object-fit: contain;  /* Ensures the full image is visible */
   margin-bottom: 10px;  /* Spacing between image and text */
+  position: relative;
 }
 
 /* Ensures product grid layout */
@@ -101,6 +102,18 @@ body {
   .buy-now:hover {
 	background-color: #cc3700;
   }
+
+  .scarcity {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #ff4500; /* Green */
+	color: white;
+	text-align: center;
+	padding: 0.75rem;
+  }
+  
   
 
   .web-container {

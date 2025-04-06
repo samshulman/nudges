@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 
-const ProductCardSocial = ({ product, addToCart, handleCheckout }) => {
+const ProductCardScarcity = ({ product, addToCart, handleCheckout }) => {
   const handleBuyNow = () => {
     alert("You bought " + product.name);
     handleCheckout();
@@ -8,6 +8,14 @@ const ProductCardSocial = ({ product, addToCart, handleCheckout }) => {
 
   return (
     <div className="product-card">
+
+      {/* Scarcity banner */}
+      {/* Conditionally render scarcity messsage */}
+      {product.showButton && (
+        <div className="scarcity">
+          Hurry! Item selling out quickly!
+        </div>
+      )}
       
       {product.image && <img src={product.image} />}
       <h3>{product.name}</h3>
@@ -24,17 +32,10 @@ const ProductCardSocial = ({ product, addToCart, handleCheckout }) => {
         <button onClick={() => addToCart(product, false)}>Add to Cart</button>
         
 
-        {/* Conditionally render "Buy Now" button */}
-        {product.showButton && (
-          <button
-            className="buy-now"
-          >
-            Item selling out quickly!
-          </button>
-        )}
+        
       </div>
     </div>
   );
 };
 
-export default ProductCardSocial;
+export default ProductCardScarcity;
