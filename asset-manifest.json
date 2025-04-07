@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/nudges/static/css/main.7df5df41.css",
-    "main.js": "/nudges/static/js/main.ecf89ddc.js",
+    "main.js": "/nudges/static/js/main.e1a2abb4.js",
     "index.html": "/nudges/index.html",
     "main.7df5df41.css.map": "/nudges/static/css/main.7df5df41.css.map",
-    "main.ecf89ddc.js.map": "/nudges/static/js/main.ecf89ddc.js.map"
+    "main.e1a2abb4.js.map": "/nudges/static/js/main.e1a2abb4.js.map"
   },
   "entrypoints": [
     "static/css/main.7df5df41.css",
-    "static/js/main.ecf89ddc.js"
+    "static/js/main.e1a2abb4.js"
   ]
 }
