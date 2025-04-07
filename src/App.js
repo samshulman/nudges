@@ -68,8 +68,8 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/products" element={<Products addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/products-strat" element={<ProductsStrat addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
-        <Route path="/products-scarcity" element={<ProductsScarcity addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
-        <Route path="/products-buynow" element={<ProductsBuy addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        <Route path="/products-1" element={<ProductsScarcity addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        <Route path="/products-2" element={<ProductsBuy addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} clearCart={() => setCart([])} saveData={saveData} orderPlaced={orderPlaced} setOrderPlaced={setOrderPlaced} />} />
       </Routes>
     </div>
