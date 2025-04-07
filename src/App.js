@@ -8,6 +8,7 @@ import ProductsBuy from "./pages/Products-Buy";
 import Checkout from "./pages/Checkout";
 import { useState } from "react";
 import productsMini from "./data/products-mini";
+import ProductsSocial from "./pages/Products-Social";
 
 const App = () => {
   const [cart, setCart] = useState([]);
@@ -70,6 +71,7 @@ const App = () => {
         <Route path="/products-strat" element={<ProductsStrat addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/products-1" element={<ProductsScarcity addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
         <Route path="/products-2" element={<ProductsBuy addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />
+        <Route path="/products-3" element={<ProductsSocial addToCart={addToCart} handleCheckout={handleCheckoutFromProduct} />} />  
         <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} clearCart={() => setCart([])} saveData={saveData} orderPlaced={orderPlaced} setOrderPlaced={setOrderPlaced} />} />
       </Routes>
     </div>
