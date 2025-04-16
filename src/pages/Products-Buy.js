@@ -1,5 +1,6 @@
 import ProductCard from "../components/ProductCard";
-import products from "../data/products-mini";
+// import products from "../data/products-mini";
+import productsCausal from "../data/products-mini-causal";
 
 
 const ProductsBuy = ({ addToCart, setBought, handleCheckout }) => {
@@ -8,7 +9,7 @@ const ProductsBuy = ({ addToCart, setBought, handleCheckout }) => {
     <div className="web-container">
       <h2>Shop Products</h2>
       <div className="product-grid">
-        {products.map((product) => (
+        {productsCausal.map((product) => (
           <ProductCard key={product.id} product={product} addToCart={addToCart} setBought={setBought} handleCheckout={handleCheckout} />
         ))}
       </div>
