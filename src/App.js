@@ -8,6 +8,7 @@ import ProductsBuy from "./pages/Products-Buy";
 import Checkout from "./pages/Checkout";
 import { useState } from "react";
 import productsMini from "./data/products-mini";
+import productsMiniCausal from "./data/products-mini-causal";
 import ProductsSocial from "./pages/Products-Social";
 
 const App = () => {
@@ -25,7 +26,7 @@ const App = () => {
       },
       body: JSON.stringify({
         item_bought: cartSave,
-        products: productsMini,
+        products: productsMiniCausal,
         dir_path: "data",
         from_checkout: fromCheckout
       })
