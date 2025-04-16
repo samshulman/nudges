@@ -26,20 +26,20 @@ function generateRandomProducts() {
     } while (Math.abs(worseRating2 - worseRating1) < 0.1);
 
     // Generate prices
-    const cheapPriceLower = Number(getRandomInRange(10, 13).toFixed(2));    // For no-button item
+    const cheapPriceLower = getRandomInRange(10, 13).toFixed(2);    // For no-button item
     
+    const priceDiff0 = 0.00;
     const priceDiff1 = 0.01;
     const priceDiff2 = 0.05;
-    const priceDiff3 = 0.10;
-    const priceDiff4 = 0.50;
-    const priceDiff5 = 1.00;
-    const priceDiff6 = 2.00;
-    const priceDiff7 = 3.00;
+    const priceDiff3 = 0.50;
+    const priceDiff4 = 1.00;
+    const priceDiff5 = 2.00;
+    const priceDiff6 = 3.00;
 
-    const cheapPriceHigher = Number((cheapPriceLower + priceDiff1).toFixed(2));   // For with-button item
+    const cheapPriceHigher = (parseFloat(cheapPriceLower) + priceDiff0).toFixed(2);    // For with-button item
     
-    const dominatedPrice1 = Number(getRandomInRange(17, 20).toFixed(2));
-    const dominatedPrice2 = Number(getRandomInRange(17, 20).toFixed(2));
+    const dominatedPrice1 = getRandomInRange(17, 20).toFixed(2);
+    const dominatedPrice2 = getRandomInRange(17, 20).toFixed(2);
 
     const products = [
         {
@@ -47,8 +47,8 @@ function generateRandomProducts() {
             name: names[0],
             price: cheapPriceHigher,
             rating: betterRating,
-            // showButton: true, // with nudge 
-            showButton: false, // control without nudge
+            showButton: true, // with nudge 
+            // showButton: false, // control without nudge
             image: "/nudges/images/pencil-high.png"
         },
         {
