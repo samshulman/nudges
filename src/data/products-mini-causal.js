@@ -35,8 +35,10 @@ function generateRandomProducts() {
     const priceDiff4 = 1.00;
     const priceDiff5 = 2.00;
     const priceDiff6 = 3.00;
+    const priceDiff7 = 4.00;
+    const priceDiff8 = 5.00;
 
-    const cheapPriceHigher = (parseFloat(cheapPriceLower) + priceDiff0).toFixed(2);    // For with-button item
+    const cheapPriceHigher = (parseFloat(cheapPriceLower) + priceDiff4).toFixed(2);    // For with-button item
     
     const dominatedPrice1 = getRandomInRange(17, 20).toFixed(2);
     const dominatedPrice2 = getRandomInRange(17, 20).toFixed(2);
